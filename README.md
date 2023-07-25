@@ -5,4 +5,5 @@
 - [X] Turn table into custom items
 - [X] Add messages on submission
 - [X] Factor out secrets
+- [ ] Add option to remove submitted record
 - [ ] Modularise

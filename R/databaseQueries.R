@@ -26,10 +26,10 @@ append_query_filter <- function(existing_filter, field_name, field_value) {
     filter <- paste0(filter, paste0(' AND '))
   }
   
-  if (is.numeric(field_value)) {
-    return(paste0(filter, paste0(field_name, '=', field_value)))
+  if (is.character(field_value)) {
+    return(paste0(filter, paste0(field_name, '=', DBI::dbQuoteString(DBI::ANSI(), field_value))))
   } else {
-    return(paste0(filter, paste0(field_name, '=\'', field_value, '\'')))
+    return(paste0(filter, paste0(field_name, '=', field_value)))
   }
 }
 
@@ -63,19 +63,19 @@ submit_record <- function(work_material, tool_material, tool_type, tool_diameter
                          tool_flutes, cut_type, tool_stepover, tool_stepdown, tool_advance,
                          spindle_speed, axis_feed, success, notes) {
   df <- data.frame(
-    work_material = work_material,
-    tool_material = tool_material,
-    tool_type = tool_type,
+    work_material = DBI::dbQuoteString(DBI::ANSI(), work_material),
+    tool_material = DBI::dbQuoteString(DBI::ANSI(), tool_material),
+    tool_type = DBI::dbQuoteString(DBI::ANSI(), tool_type),
     tool_diameter = tool_diameter,
     tool_flutes = tool_flutes,
-    cut_type = cut_type,
+    cut_type = DBI::dbQuoteString(DBI::ANSI(), cut_type),
     tool_stepover = tool_stepover,
     tool_stepdown = tool_stepdown,
     tool_advance = tool_advance,
     spindle_speed = spindle_speed,
     axis_feed = axis_feed,
     success = success,
-    notes = notes
+    notes = DBI::dbQuoteString(DBI::ANSI(), notes)
   )
   
   with_database(function(db_connection) {

@@ -6,4 +6,8 @@
 - [X] Add messages on submission
 - [X] Factor out secrets
 - [ ] Add option to remove submitted record
+- [X] Sanitise SQL queries
+- [X] Test sanitised SQL queries
 - [ ] Modularise
+- [ ] Show only first 10 matches for records
+  - [ ] Allow for more records to be shown

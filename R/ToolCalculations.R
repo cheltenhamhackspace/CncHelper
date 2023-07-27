@@ -68,6 +68,10 @@ get_surface_speed <- function(work_material, tool_material, tool_type) {
 }
 
 calculate_spindle_speed <- function(work_material, tool_material, tool_diameter, tool_type) {
+  if (is.na(tool_diameter)) {
+    return(NA)
+  }
+  
   return(get_surface_speed(work_material, tool_material, tool_type) / (pi * tool_diameter))
 }
 
@@ -76,6 +80,10 @@ calculate_axis_feed <- function(spindle_speed, tool_flute_count, advance_per_flu
 }
 
 calculate_axis_feed_with_chip_thinning <- function(axis_feed, tool_diameter, cut_type, tool_stepover) {
+  if (is.na(tool_stepover)) {
+    return(NA)
+  }
+  
   if (!is_side_cut(cut_type) || tool_stepover >= tool_diameter / 2) {
     return(axis_feed)
   }

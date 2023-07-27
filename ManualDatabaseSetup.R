@@ -24,7 +24,9 @@ fields = c(
 )
 
 # DBI::dbRemoveTable(con, 'mill_records')
+# DBI::dbRemoveTable(con, 'to_delete')
 # DBI::dbCreateTable(con, 'mill_records', fields)
+# DBI::dbCreateTable(con, 'to_delete', fields)
 
 # result <- DBI::dbSendQuery(con, "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_CATALOG='machining'")
 # DBI::dbFetch(result)
@@ -37,5 +39,9 @@ fields = c(
 result <- DBI::dbSendQuery(con, "SELECT * FROM mill_records")
 DBI::dbFetch(result)
 DBI::dbClearResult(result)
+
+# result <- DBI::dbSendQuery(con, "DELETE FROM mill_records WEHRE ROW_ID > ")
+# DBI::dbFetch(result)
+# DBI::dbClearResult(result)
 
 DBI::dbDisconnect(con)

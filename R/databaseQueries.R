@@ -63,19 +63,19 @@ submit_record <- function(work_material, tool_material, tool_type, tool_diameter
                          tool_flutes, cut_type, tool_stepover, tool_stepdown, tool_advance,
                          spindle_speed, axis_feed, success, notes) {
   df <- data.frame(
-    work_material = DBI::dbQuoteString(DBI::ANSI(), work_material),
-    tool_material = DBI::dbQuoteString(DBI::ANSI(), tool_material),
-    tool_type = DBI::dbQuoteString(DBI::ANSI(), tool_type),
+    work_material = work_material,
+    tool_material = tool_material,
+    tool_type = tool_type,
     tool_diameter = tool_diameter,
     tool_flutes = tool_flutes,
-    cut_type = DBI::dbQuoteString(DBI::ANSI(), cut_type),
+    cut_type = cut_type,
     tool_stepover = tool_stepover,
     tool_stepdown = tool_stepdown,
     tool_advance = tool_advance,
     spindle_speed = spindle_speed,
     axis_feed = axis_feed,
     success = success,
-    notes = DBI::dbQuoteString(DBI::ANSI(), notes)
+    notes = notes
   )
   
   with_database(function(db_connection) {

@@ -1,5 +1,7 @@
 
-create_suggestions_panel <- function(suggestions) {
+suggestions_panel_ui <- function(id, suggestions) {
+  ns = NS(id)
+  
   if (nrow(suggestions) == 0) {
     return()
   }
@@ -9,13 +11,15 @@ create_suggestions_panel <- function(suggestions) {
     lapply(
       seq(1, nrow(suggestions)),
       function(row) {
-        create_suggestion_item(suggestions[row,])
+        suggestion_item_ui(ns(row), suggestions[row,])
       }
     )
   )
 }
 
-create_suggestion_item <- function(row) {
+suggestion_item_ui <- function(id, row) {
+  ns = NS(id)
+  
   style = 'word-wrap: break-word; border: 2px solid gray; border-radius: 5px; margin: 2px; padding: 0px 5px 0px 5px;'
   if (row$success) {
     style <- paste0(style, ' background: #eeffee;')

@@ -73,8 +73,8 @@ parameter_record_input_panel_ui <- function(id) {
         ),
         numericInput(
           inputId = ns('record_tool_advance'),
-          label = 'Tool Advance Distance per Flute',
-          value = 0.01,
+          label = 'Tool Advance Distance per Flute (Optional)',
+          value = NA,
           min = 0,
           max = 1,
           step = 0.005

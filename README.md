@@ -10,4 +10,4 @@
 - [X] Modularise
 - [ ] Show only first 10 matches for records
   - [ ] Allow for more records to be shown
-  - [ ] Sort records by feed rate
+- [X] Sort records by feed rate

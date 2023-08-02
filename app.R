@@ -81,18 +81,22 @@ server <- function(input, output, session) {
   output$records_list <- renderUI({
     # Take dependency on record submit button
     record_submit()
+    
+    records_df <- get_records(
+      ifelse(filter_work_material(), select_work_material(), NA),
+      ifelse(filter_tool_material(), select_tool_material(), NA),
+      ifelse(filter_tool_type(), select_tool_type(), NA),
+      ifelse(filter_tool_diameter(), select_tool_diameter(), NA),
+      ifelse(filter_tool_flutes(), select_tool_flutes(), NA),
+      ifelse(filter_cut_type(), select_cut_type(), NA),
+      filter_success()
+    )
+    
+    records_df <- records_df[order(records_df$axis_feed, decreasing = TRUE), ]
 
     suggestions_panel_ui(
       id = 'mill_suggestions',
-      get_records(
-        ifelse(filter_work_material(), select_work_material(), NA),
-        ifelse(filter_tool_material(), select_tool_material(), NA),
-        ifelse(filter_tool_type(), select_tool_type(), NA),
-        ifelse(filter_tool_diameter(), select_tool_diameter(), NA),
-        ifelse(filter_tool_flutes(), select_tool_flutes(), NA),
-        ifelse(filter_cut_type(), select_cut_type(), NA),
-        filter_success()
-      )
+      records_df
     )
   })
 }

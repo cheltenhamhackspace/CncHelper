@@ -27,13 +27,18 @@ suggestion_item_ui <- function(id, row) {
     style <- paste0(style, ' background: #ffeeee;')
   }
   
+  record_is_side_cut = !is.na(row$tool_stepover)
+  record_has_advance = !is.na(row$tool_advance)
+  
   line_1 <- paste0(row$tool_flutes, '-flute ', row$tool_diameter, 'mm ', row$tool_material, ' ', row$tool_type)
   line_2 <- paste0(row$cut_type, ' cutting ', row$work_material, ' at ', row$spindle_speed, 'RPM and ', row$axis_feed, 'mm per min')
   line_3 <- paste0(
     'With ',
     ifelse(is.na(row$tool_stepover), '', paste0(row$tool_stepover, 'mm stepover and ')),
-    ifelse(is.na(row$tool_stepdown), '', paste0(row$tool_stepdown, 'mm stepdown and ')),
-    row$tool_advance, 'mm advance per flute'
+    ifelse(is.na(row$tool_stepdown), '', paste0(row$tool_stepdown, 'mm stepdown')),
+    ifelse(record_is_side_cut & record_has_advance, ' and ', ''),
+    ifelse(is.na(row$tool_advance), '', paste0(row$tool_advance, 'mm advance per flute')),
+    '.'
   )
   line_4 <- paste0(ifelse(stringr::str_length(row$notes) == 0, '', '\nNotes:\n'), row$notes)
   

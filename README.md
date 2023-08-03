@@ -1,6 +1,5 @@
 # To Do:
 - [X] Hook up parameter submission to database
-- [ ] Hook up submission form to side bar
 - [X] Add parameter filtering to table
 - [X] Turn table into custom items
 - [X] Add messages on submission
@@ -12,3 +11,4 @@
 - [ ] Show only first 10 matches for records
   - [ ] Allow for more records to be shown
 - [X] Sort records by feed rate
+- [ ] Add recording for tool usage time

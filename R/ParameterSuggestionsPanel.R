@@ -57,7 +57,7 @@ suggestion_item_ui <- function(id, row) {
       div(
         id = ns("delete"),
         style = "float: right; cursor: pointer;",
-        HTML("🗙")
+        HTML("&#128473;")
       )
     )
   )

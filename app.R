@@ -5,35 +5,36 @@ ui <- fluidPage(
   
   titlePanel('CNC Mill Feeds and Speeds Helper'),
   
-  sidebarLayout(
-    sidebarPanel(
-      parameter_input_panel_ui(id = 'select_parameters')
+  tabsetPanel(
+    tabPanel(
+      title = "Calculate",
+      sidebarLayout(
+        sidebarPanel(
+          parameter_input_panel_ui(id = 'select_parameters')
+        ),
+        
+        mainPanel(
+          feeds_and_speeds_panel_ui(id = 'feeds_and_speeds'),
+          
+          hr(),
+          
+          h3('Member Recommendations'),
+          
+          bsCollapse(
+            id = 'filters',
+            bsCollapsePanel(
+              title = 'Click for filters',
+              filter_panel_ui(id = 'filter_panel')
+            )
+          ),
+          
+          uiOutput(outputId = 'records_list')
+        )
+      )
     ),
-    
-    mainPanel(
-      feeds_and_speeds_panel_ui(id = 'feeds_and_speeds'),
-      
-      hr(),
-      
-      bsCollapse(
-        id = 'record_parameters',
-        bsCollapsePanel(
-          title = 'Click here to record your own parameters',
-          parameter_record_input_panel_ui('record_parameters')
-        )
-      ),
-      
-      h3('Member Recommendations'),
-      
-      bsCollapse(
-        id = 'filters',
-        bsCollapsePanel(
-          title = 'Click for filters',
-          filter_panel_ui(id = 'filter_panel')
-        )
-      ),
-      
-      uiOutput(outputId = 'records_list')
+    tabPanel(
+      title = "Record",
+      parameter_record_input_panel_ui('record_parameters')
     )
   )
 )

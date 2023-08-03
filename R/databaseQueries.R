@@ -47,7 +47,7 @@ get_records <- function(work_material = NULL, tool_material = NULL,
     filter <- append_query_filter(filter, 'success', success)
   }
   
-  query <- paste0('SELECT * FROM mill_records', filter)
+  query <- paste0('SELECT *, rowid FROM mill_records', filter)
   
   return(
     with_database(function(con) {
@@ -60,8 +60,8 @@ get_records <- function(work_material = NULL, tool_material = NULL,
 }
 
 submit_record <- function(work_material, tool_material, tool_type, tool_diameter,
-                         tool_flutes, cut_type, tool_stepover, tool_stepdown, tool_advance,
-                         spindle_speed, axis_feed, success, notes) {
+                          tool_flutes, cut_type, tool_stepover, tool_stepdown, tool_advance,
+                          spindle_speed, axis_feed, success, notes) {
   df <- data.frame(
     work_material = work_material,
     tool_material = tool_material,
@@ -79,6 +79,15 @@ submit_record <- function(work_material, tool_material, tool_type, tool_diameter
   )
   
   with_database(function(db_connection) {
+    # Find last ID
+    # Increment ID on data frame
     DBI::dbAppendTable(db_connection, 'mill_records', df)
+  })
+}
+
+delete_record <- function(db_id) {
+  with_database(function(db_connection) {
+    result <- DBI::dbSendQuery(db_connection, paste0("DELETE FROM mill_records WHERE rowid = ", db_id))
+    DBI::dbClearResult(result)
   })
 }

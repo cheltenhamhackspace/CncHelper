@@ -5,7 +5,8 @@
 - [X] Turn table into custom items
 - [X] Add messages on submission
 - [X] Factor out secrets
-- [ ] Add option to remove submitted record
+- [X] Add option to remove submitted record
+  - [X] Update view on record deleted
 - [?] Sanitise SQL queries
 - [X] Modularise
 - [ ] Show only first 10 matches for records

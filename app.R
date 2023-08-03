@@ -65,7 +65,7 @@ server <- function(input, output, session) {
     select_reactives$select_cut_is_sideways
   )
   
-  record_submit <- parameter_record_input_panel_server('record_parameters')$record_submit
+  records_changed <- parameter_record_input_panel_server('record_parameters')$record_submit
   
   filter_reactives <- filter_panel_server(id = 'filter_panel')
   
@@ -77,11 +77,11 @@ server <- function(input, output, session) {
   filter_cut_type <- filter_reactives$filter_cut_type
   filter_success <- filter_reactives$filter_success
   
-  # Fetch suggestions from database
-  output$records_list <- renderUI({
+  records <- reactive({
     # Take dependency on record submit button
-    record_submit()
+    records_changed()
     
+    # Retrieve filtered records
     records_df <- get_records(
       ifelse(filter_work_material(), select_work_material(), NA),
       ifelse(filter_tool_material(), select_tool_material(), NA),
@@ -92,12 +92,20 @@ server <- function(input, output, session) {
       filter_success()
     )
     
-    records_df <- records_df[order(records_df$axis_feed, decreasing = TRUE), ]
-
+    # Return sorted data frame of records
+    return(records_df[order(records_df$axis_feed, decreasing = TRUE), ])
+  })
+  
+  # Fetch suggestions from database
+  output$records_list <- renderUI({
     suggestions_panel_ui(
       id = 'mill_suggestions',
-      records_df
+      records()
     )
+  })
+  
+  observe({
+    suggestions_panel_server('mill_suggestions', records(), records_changed)
   })
 }
 

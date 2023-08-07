@@ -6,9 +6,10 @@
 - [X] Factor out secrets
 - [X] Add option to remove submitted record
   - [X] Update view on record deleted
-- [?] Sanitise SQL queries
+- [-] Sanitise SQL queries
 - [X] Modularise
 - [ ] Show only first 10 matches for records
   - [ ] Allow for more records to be shown
 - [X] Sort records by feed rate
 - [ ] Add recording for tool usage time
+- [X] Add spindle limiting

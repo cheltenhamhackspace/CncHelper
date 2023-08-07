@@ -1,5 +1,7 @@
 library(dplyr)
 
+max_rpm = 4000
+
 tools = data.frame(
   name = c(),
   side_cutter = c(),
@@ -35,6 +37,10 @@ surface_speeds <- surface_speeds %>%
   rbind(data.frame(work_material = 'Steel', tool_material = 'Carbide', surface_speed = 80000)) %>%
   rbind(data.frame(work_material = 'Cast Iron', tool_material = 'Carbide', surface_speed = 60000)) %>%
   rbind(data.frame(work_material = 'Stainless Steel', tool_material = 'Carbide', surface_speed = 50000))
+
+get_max_rpm <- function() {
+  return(max_rpm)
+}
 
 get_work_materials <- function() {
   return(sort(unique(surface_speeds$work_material)))

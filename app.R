@@ -57,7 +57,6 @@ server <- function(input, output, session) {
   select_tool_flutes <- select_reactives$select_tool_flutes
   select_cut_type <- select_reactives$select_cut_type
   select_tool_stepover <- select_reactives$select_tool_stepover
-  select_tool_stepdown <- select_reactives$select_tool_stepdown
   select_tool_advance <- select_reactives$select_tool_advance
   
   feeds_and_speeds_panel_server(

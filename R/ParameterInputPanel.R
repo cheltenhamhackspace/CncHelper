@@ -56,14 +56,6 @@ parameter_input_panel_ui <- function(id) {
           min = 0,
           max = 100,
           step = 0.5
-        ),
-        numericInput(
-          inputId = ns('select_tool_stepdown'),
-          label = 'Tool stepdown',
-          value = 4,
-          min = 0,
-          max = 40,
-          step = 0.5
         )
       ),
       numericInput(
@@ -109,7 +101,6 @@ parameter_input_panel_server <- function(id) {
         select_tool_flutes = reactive({ input$select_tool_flutes }),
         select_cut_type = reactive({ input$select_cut_type }),
         select_tool_stepover = reactive({ input$select_tool_stepover }),
-        select_tool_stepdown = reactive({ input$select_tool_stepdown }),
         select_tool_advance = reactive({ input$select_tool_advance }),
         select_cut_is_sideways = select_cut_is_sideways
       )

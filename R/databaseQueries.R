@@ -79,16 +79,18 @@ submit_record <- function(work_material, tool_material, tool_type, tool_diameter
     notes = notes
   )
   
-  with_database(function(db_connection) {
-    # Find last ID
-    # Increment ID on data frame
-    DBI::dbAppendTable(db_connection, table_name, df)
-  })
+  with_database(
+    function(db_connection) {
+      DBI::dbAppendTable(db_connection, table_name, df)
+    }
+  )
 }
 
 delete_record <- function(db_id) {
-  with_database(function(db_connection) {
-    result <- DBI::dbSendQuery(db_connection, paste0("DELETE FROM ", table_name, " WHERE rowid = ", db_id))
-    DBI::dbClearResult(result)
-  })
+  with_database(
+    function(db_connection) {
+      result <- DBI::dbSendQuery(db_connection, paste0("DELETE FROM ", table_name, " WHERE rowid = ", db_id))
+      DBI::dbClearResult(result)
+    }
+  )
 }

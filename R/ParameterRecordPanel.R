@@ -43,7 +43,7 @@ parameter_record_input_panel_ui <- function(id) {
         extra_style = 'vertical-align: top;',
         h3('Select Cutting Parameters'),
         conditionalPanel(
-          condition = 'output.record_tool_is_side_cutter == true',
+          condition = 'output.record_tool_is_side_cutter',
           ns = ns,
           selectizeInput(
             inputId = ns('record_cut_type'),
@@ -52,7 +52,7 @@ parameter_record_input_panel_ui <- function(id) {
           )
         ),
         conditionalPanel(
-          condition = 'output.record_cut_is_sideways == true',
+          condition = 'output.record_cut_is_sideways',
           ns = ns,
           numericInput(
             inputId = ns('record_tool_stepover'),

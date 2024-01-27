@@ -38,7 +38,7 @@ parameter_input_panel_ui <- function(id) {
       ),
       h3('Select Cutting Parameters'),
       conditionalPanel(
-        condition = 'output.select_tool_is_side_cutter == true',
+        condition = 'output.select_tool_is_side_cutter',
         ns = ns,
         selectizeInput(
           inputId = ns('select_cut_type'),
@@ -47,7 +47,7 @@ parameter_input_panel_ui <- function(id) {
         )
       ),
       conditionalPanel(
-        condition = 'output.select_cut_is_sideways == true',
+        condition = 'output.select_cut_is_sideways',
         ns = ns,
         numericInput(
           inputId = ns('select_tool_stepover'),

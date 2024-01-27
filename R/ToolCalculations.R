@@ -1,25 +1,12 @@
-library(dplyr)
 
 max_rpm = 4000
 
-tools = data.frame(
-  name = c(),
-  side_cutter = c(),
-  speed_multiplier = c()
-)
-
-tools <- tools %>%
+tools <- data.frame() %>%
   rbind(data.frame(name = 'End Mill', side_cutter = TRUE, speed_multiplier = 1)) %>%
   rbind(data.frame(name = 'Drill', side_cutter = FALSE, speed_multiplier = 1)) %>%
   rbind(data.frame(name = 'Reamer', side_cutter = FALSE, speed_multiplier = 0.5))
 
-surface_speeds = data.frame(
-  work_material = c(),
-  tool_material = c(),
-  surface_speed = c()
-)
-
-surface_speeds <- surface_speeds %>%
+surface_speeds <- data.frame() %>%
   rbind(data.frame(work_material = 'Aluminium', tool_material = 'HSS', surface_speed = 76000)) %>%
   rbind(data.frame(work_material = 'Plastic', tool_material = 'HSS', surface_speed = 60000)) %>%
   rbind(data.frame(work_material = 'Brass', tool_material = 'HSS', surface_speed = 60000)) %>%

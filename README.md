@@ -1,4 +1,10 @@
-# To Do:
+# Hack Mill
+A simple speeds and feeds calculator, specifically for use with [Cheltenham Hackspace](https://www.cheltenhamhackspace.org/)'s CNC milling machine.
+
+## To deploy:
+Change the "DEVELOPMENT" flag in `secrets.json` to `false` before deploying.
+
+## To Do:
 - [X] Hook up parameter submission to database
 - [X] Add parameter filtering to table
 - [X] Turn table into custom items

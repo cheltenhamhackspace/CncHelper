@@ -1,4 +1,5 @@
 secrets <- rjson::fromJSON(file = 'secrets.json')
+table_name = ifelse(is.null(secrets$DEVELOPMENT) || !secrets$DEVELOPMENT, "mill_records", "dev")
 
 with_database <- function(action) {
   con <- DBI::dbConnect(RPostgres::Postgres(),
@@ -47,7 +48,7 @@ get_records <- function(work_material = NULL, tool_material = NULL,
     filter <- append_query_filter(filter, 'success', success)
   }
   
-  query <- paste0('SELECT *, rowid FROM mill_records', filter)
+  query <- paste0('SELECT *, rowid FROM ', table_name, filter)
   
   return(
     with_database(function(con) {
@@ -81,13 +82,13 @@ submit_record <- function(work_material, tool_material, tool_type, tool_diameter
   with_database(function(db_connection) {
     # Find last ID
     # Increment ID on data frame
-    DBI::dbAppendTable(db_connection, 'mill_records', df)
+    DBI::dbAppendTable(db_connection, table_name, df)
   })
 }
 
 delete_record <- function(db_id) {
   with_database(function(db_connection) {
-    result <- DBI::dbSendQuery(db_connection, paste0("DELETE FROM mill_records WHERE rowid = ", db_id))
+    result <- DBI::dbSendQuery(db_connection, paste0("DELETE FROM ", table_name, " WHERE rowid = ", db_id))
     DBI::dbClearResult(result)
   })
 }

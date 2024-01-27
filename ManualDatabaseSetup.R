@@ -7,26 +7,24 @@ con <- DBI::dbConnect(RPostgres::Postgres(),
                       user = secrets$database_user,
                       password = secrets$database_password)
 
-# fields = c(
-#   work_material = 'string',
-#   tool_material = 'string',
-#   tool_type = 'string',
-#   tool_diameter = 'numeric',
-#   tool_flutes = 'integer',
-#   cut_type = 'string',
-#   tool_stepover = 'numeric',
-#   tool_stepdown = 'numeric',
-#   tool_advance = 'numeric',
-#   spindle_speed = 'numeric',
-#   axis_feed = 'numeric',
-#   success = 'boolean',
-#   notes = 'string'
-# )
+fields = c(
+  work_material = 'string',
+  tool_material = 'string',
+  tool_type = 'string',
+  tool_diameter = 'numeric',
+  tool_flutes = 'integer',
+  cut_type = 'string',
+  tool_stepover = 'numeric',
+  tool_stepdown = 'numeric',
+  tool_advance = 'numeric',
+  spindle_speed = 'numeric',
+  axis_feed = 'numeric',
+  success = 'boolean',
+  notes = 'string'
+)
 
-# DBI::dbRemoveTable(con, 'mill_records')
-# DBI::dbRemoveTable(con, 'to_delete')
-# DBI::dbCreateTable(con, 'mill_records', fields, 'PRIMARY KEY("id")')
-# DBI::dbCreateTable(con, 'to_delete', fields)
+# DBI::dbRemoveTable(con, 'dev')
+DBI::dbCreateTable(con, 'dev', fields, 'PRIMARY KEY("id")')
 
 
 # record_df <- data.frame(
@@ -51,14 +49,14 @@ con <- DBI::dbConnect(RPostgres::Postgres(),
 # DBI::dbFetch(result)
 # DBI::dbClearResult(result)
 
-result <- DBI::dbSendQuery(con, "SELECT column_name, data_type FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG='machining' AND TABLE_NAME='mill_records'")
+result <- DBI::dbSendQuery(con, "SELECT column_name, data_type FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG='machining' AND TABLE_NAME='dev'")
 DBI::dbFetch(result)
 DBI::dbClearResult(result)
 
-# result <- DBI::dbSendQuery(con, "DELETE FROM mill_records WHERE rowid > 20")
+# result <- DBI::dbSendQuery(con, "DELETE FROM dev WHERE rowid > 20")
 # DBI::dbClearResult(result)
 
-result <- DBI::dbSendQuery(con, "SELECT *, rowid FROM mill_records")
+result <- DBI::dbSendQuery(con, "SELECT *, rowid FROM dev")
 DBI::dbFetch(result)
 DBI::dbClearResult(result)
 

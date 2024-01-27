@@ -208,8 +208,6 @@ parameter_record_input_panel_server <- function(id) {
       }
     )
     
-    return(
-      list(record_submit = record_submitted)
-    )
+    return(record_submitted)
   })
 }

@@ -87,11 +87,13 @@ calculate_page_server <- function(id, records_changed) {
     # Fetch suggestions from database
     output$records_list <- renderUI({
       suggestions_panel_ui(
-        id = 'mill_suggestions',
+        id = session$ns('mill_suggestions'),
         records()
       )
     })
     
-    return(records)
+    observe({
+      suggestions_panel_server(id = 'mill_suggestions', records(), records_changed)
+    })
   })
 }

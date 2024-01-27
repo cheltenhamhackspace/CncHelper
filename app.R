@@ -26,12 +26,8 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
   
-  records_changed <- parameter_record_input_panel_server(id = 'record_parameters')$record_submit
-  records = calculate_page_server(id = "calculate", records_changed = records_changed)
-  
-  observe({
-    suggestions_panel_server(id = 'mill_suggestions', records(), records_changed)
-  })
+  records_changed <- parameter_record_input_panel_server(id = 'record_parameters')
+  calculate_page_server(id = "calculate", records_changed = records_changed)
 }
 
 # Run the application
